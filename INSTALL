@@ -1,0 +1,9 @@
+Building GrowthCoin
+
+See doc/readme-qt.rst for instructions on building GrowthCoin QT,
+the intended-for-end-users, nice-graphical-interface, reference
+implementation of GrowthCoin.
+
+See doc/build-*.txt for instructions on building GrowthCoind,
+the intended-for-services, no-graphical-interface, reference
+implementation of GrowthCoin.
