@@ -1039,6 +1039,8 @@ unsigned int static GetNextTargetRequired(const CBlockIndex* pindexLast, bool fP
         return bnTargetLimit.GetCompact(); // second block
 
     int64 nActualSpacing = pindexPrev->GetBlockTime() - pindexPrevPrev->GetBlockTime();
+        if (nBestHeight >= 305052 && nActualSpacing < 0) nActualSpacing = 0; // patch to prevent negative nActualSpacing
+
 
     // ppcoin: target change every block
     // ppcoin: retarget with exponential moving toward target spacing
