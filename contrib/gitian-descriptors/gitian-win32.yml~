@@ -15,7 +15,7 @@ remotes: []
 files:
 - "qt-win32-4.7.4-gitian.zip"
 - "boost-win32-1.49.0-gitian2.zip"
-- "sherlockcoin-deps-1.2.0.zip"
+- "growthcoin-deps-1.2.0.zip"
 - "growthcoin.zip"
 
 script: |
@@ -41,7 +41,7 @@ script: |
   mv include/boost .
   cd ..
   #
-  unzip sherlockcoin-deps-1.2.0.zip
+  unzip growthcoin-deps-1.2.0.zip
   #
   find -type f | xargs touch --date="$REFERENCE_DATETIME"
   #

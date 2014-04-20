@@ -1,4 +1,4 @@
 obj/version.o: version.cpp version.h clientversion.h \
- /home/prosperous/Desktop/growthcoin-master/src/obj/build.h
+ /home/prosperous/growthcoin/src/obj/build.h
 version.cpp version.h clientversion.h :
- /home/prosperous/Desktop/growthcoin-master/src/obj/build.h :
+ /home/prosperous/growthcoin/src/obj/build.h :
