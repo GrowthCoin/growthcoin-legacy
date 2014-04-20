@@ -5,7 +5,7 @@ SetCompressor /SOLID lzma
 
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 1.2.1
+!define VERSION 1.2.2
 !define COMPANY "Growthcoin project"
 !define URL http://www.growthcoin.org
 
@@ -45,13 +45,13 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-OutFile growthcoin-1.2.1-win32-setup.exe
+OutFile growthcoin-1.2.2-win32-setup.exe
 InstallDir $PROGRAMFILES\Growthcoin
 CRCCheck on
 XPStyle on
 BrandingText " "
 ShowInstDetails show
-VIProductVersion 1.2.1.0
+VIProductVersion 1.2.2.0
 VIAddVersionKey ProductName Growthcoin
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
