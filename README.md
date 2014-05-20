@@ -19,4 +19,4 @@ GrowthCoin provides monthly interest rate of 5.95%, for stakes that are held dur
 	- The default ports are 18177(Connect) and 18178(RPC).
 
 
-The official website is: GrowthCoin.org (under construction).
+The official website is: http://growthco.in
