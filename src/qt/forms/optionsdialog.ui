@@ -23,7 +23,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="tabMain">
       <attribute name="title">
@@ -370,6 +370,16 @@
          </property>
          <property name="text">
           <string>&amp;Display addresses in transaction list</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="coinControlFeatures">
+         <property name="toolTip">
+          <string>Whether to show coin control features or not.</string>
+         </property>
+         <property name="text">
+          <string>Display Coin &amp;Control Features (experts only!)</string>
          </property>
         </widget>
        </item>

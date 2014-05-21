@@ -1,5 +1,5 @@
 TEMPLATE = app
-TARGET = growthcoin-qt
+TARGET = GrowthCoin-Qt
 VERSION = 1.2.2
 INCLUDEPATH += src src/json src/qt
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE BOOST_THREAD_PROVIDES_GENERIC_SHARED_MUTEX_ON_WIN __NO_SYSTEM_INCLUDES
@@ -258,7 +258,7 @@ SOURCES += src/qt/test/test_main.cpp \
 HEADERS += src/qt/test/uritests.h
 DEPENDPATH += src/qt/test
 QT += testlib
-TARGET = growthcoin-qt_test
+TARGET = GrowthCoin-Qt_test
 DEFINES += BITCOIN_QT_TEST
 }
 
@@ -339,7 +339,7 @@ macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm
 macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit
 macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
 macx:ICON = src/qt/res/icons/Growthcoin.icns
-macx:TARGET = "growthcoin-qt"
+macx:TARGET = "GrowthCoin-Qt"
 macx:QMAKE_CFLAGS_THREAD += -pthread
 macx:QMAKE_LFLAGS_THREAD += -pthread
 macx:QMAKE_CXXFLAGS_THREAD += -pthread
