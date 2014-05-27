@@ -644,15 +644,6 @@ public:
     void copyStats(CNodeStats &stats);
 };
 
-
-
-
-
-
-
-
-
-
 inline void RelayInventory(const CInv& inv)
 {
     // Put on lists to offer to the other nodes
@@ -692,5 +683,8 @@ inline void RelayMessage<>(const CInv& inv, const CDataStream& ss)
     RelayInventory(inv);
 }
 
+class CTransaction;
+void RelayTransaction(const CTransaction& tx, const uint256& hash);
+void RelayTransaction(const CTransaction& tx, const uint256& hash, const CDataStream& ss);
 
 #endif
