@@ -1153,6 +1153,7 @@ void MapPort()
 // The second name should resolve to a list of seed addresses.
 static const char *strDNSSeed[][2] = {
     {"blockx", "seed.grw.blockx.info"},
+    {"acidpool", "seed1.grw.acidpool.com"},
 };
 
 void ThreadDNSAddressSeed(void* parg)
