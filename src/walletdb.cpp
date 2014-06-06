@@ -3,6 +3,9 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#include <iostream>
+#include <fstream>
+
 #include "walletdb.h"
 #include "wallet.h"
 #include <boost/filesystem.hpp>
@@ -397,8 +400,8 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
         else if (strType == "version")
         {
             ssValue >> wss.nFileVersion;
-            if (nFileVersion == 10300)
-                nFileVersion = 300;
+            if (wss.nFileVersion == 10300)
+                wss.nFileVersion = 300;
         }
         else if (strType == "cscript")
         {
