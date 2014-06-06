@@ -16,7 +16,7 @@ GrowthCoin provides monthly interest rate of 5.95%, for stakes that are held dur
 
 	- Hourly random bonus block of 500-1000 coins (that is, 1/80 chance to get a bonus block).
 
-	- The default ports are 18177(Connect) and 18178(RPC).
+	- The default ports are 17177(Connect) and 17178(RPC).
 
 
 The official website is: http://growthco.in
