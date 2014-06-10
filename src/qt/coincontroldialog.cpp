@@ -97,21 +97,21 @@ CoinControlDialog::CoinControlDialog(QWidget *parent) :
     // (un)select all
     connect(ui->pushButtonSelectAll, SIGNAL(clicked()), this, SLOT(buttonSelectAllClicked()));
 
-    ui->treeWidget->setColumnWidth(COLUMN_CHECKBOX, 84);
-    ui->treeWidget->setColumnWidth(COLUMN_AMOUNT, 100);
+    ui->treeWidget->setColumnWidth(COLUMN_CHECKBOX, 90);
+    ui->treeWidget->setColumnWidth(COLUMN_AMOUNT, 125);
+    ui->treeWidget->setColumnWidth(COLUMN_LABEL, 160);
+    ui->treeWidget->setColumnWidth(COLUMN_ADDRESS, 290);
+    ui->treeWidget->setColumnWidth(COLUMN_DATE, 120);
     ui->treeWidget->setColumnWidth(COLUMN_CONFIRMATIONS, 70);
-    ui->treeWidget->setColumnWidth(COLUMN_WEIGHT, 90);
-    ui->treeWidget->setColumnWidth(COLUMN_LABEL, 170);
-    ui->treeWidget->setColumnWidth(COLUMN_ADDRESS, 250);
-    ui->treeWidget->setColumnWidth(COLUMN_DATE, 90);
-    ui->treeWidget->setColumnWidth(COLUMN_PRIORITY, 100);
+    ui->treeWidget->setColumnWidth(COLUMN_WEIGHT, 70);
+    ui->treeWidget->setColumnWidth(COLUMN_PRIORITY, 80);
     ui->treeWidget->setColumnHidden(COLUMN_TXHASH, true);         // store transacton hash in this column, but dont show it
     ui->treeWidget->setColumnHidden(COLUMN_VOUT_INDEX, true);     // store vout index in this column, but dont show it
     ui->treeWidget->setColumnHidden(COLUMN_AMOUNT_INT64, true);   // store amount int64 in this column, but dont show it
     ui->treeWidget->setColumnHidden(COLUMN_PRIORITY_INT64, true); // store priority int64 in this column, but dont show it
 
     // default view is sorted by amount desc
-    sortView(COLUMN_CONFIRMATIONS, Qt::DescendingOrder);
+    sortView(COLUMN_CONFIRMATIONS, Qt::AscendingOrder);
 }
 
 CoinControlDialog::~CoinControlDialog()

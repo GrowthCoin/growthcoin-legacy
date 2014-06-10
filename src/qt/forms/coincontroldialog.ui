@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
+    <width>1050</width>
     <height>500</height>
    </rect>
   </property>
@@ -141,7 +141,7 @@
           <enum>Qt::ActionsContextMenu</enum>
          </property>
          <property name="text">
-          <string>0.00 CAP</string>
+          <string>0.00 GRW</string>
          </property>
          <property name="textInteractionFlags">
           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -221,7 +221,7 @@
           <enum>Qt::ActionsContextMenu</enum>
          </property>
          <property name="text">
-          <string>0.00 CAP</string>
+          <string>0.00 GRW</string>
          </property>
          <property name="textInteractionFlags">
           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -307,7 +307,7 @@
           <enum>Qt::ActionsContextMenu</enum>
          </property>
          <property name="text">
-          <string>0.00 CAP</string>
+          <string>0.00 GRW</string>
          </property>
          <property name="textInteractionFlags">
           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -345,7 +345,7 @@
           <enum>Qt::ActionsContextMenu</enum>
          </property>
          <property name="text">
-          <string>0.00 CAP</string>
+          <string>0.00 GRW</string>
          </property>
          <property name="textInteractionFlags">
           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -379,7 +379,7 @@
         <height>41</height>
        </rect>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayoutPanel" stretch="0,0,0,0,0">
+      <layout class="QHBoxLayout" name="horizontalLayoutPanel" stretch="0,0,0,0">
        <property name="spacing">
         <number>14</number>
        </property>
@@ -392,7 +392,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Clear Selections</string>
+          <string>(un)select all</string>
          </property>
         </widget>
        </item>
@@ -425,14 +425,6 @@
          </property>
         </widget>
        </item>
-<!--       <item>
-        <widget class="QLabel" name="labelLocked">
-         <property name="text">
-          <string>(1 locked)</string>
-         </property>
-        </widget>
-       </item>
--->
        <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
@@ -459,7 +451,7 @@
       <bool>false</bool>
      </property>
      <property name="columnCount">
-      <number>11</number>
+      <number>12</number>
      </property>
      <attribute name="headerShowSortIndicator" stdset="0">
       <bool>true</bool>
@@ -479,19 +471,6 @@
      </column>
      <column>
       <property name="text">
-       <string>Confirms</string>
-           </property>
-           <property name="toolTip">
-                <string>Confirmed</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Weight</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
        <string notr="true">Label</string>
       </property>
      </column>
@@ -500,9 +479,22 @@
        <string>Address</string>
       </property>
      </column>
-         <column>
+     <column>
       <property name="text">
        <string>Date</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Confirms</string>
+      </property>
+      <property name="toolTip">
+       <string>Confirmed</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Weight</string>
       </property>
      </column>
      <column>
