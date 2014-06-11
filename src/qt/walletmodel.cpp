@@ -283,7 +283,7 @@ bool WalletModel::setWalletEncrypted(bool encrypted, const SecureString &passphr
     }
 }
 
-bool WalletModel::setWalletLocked(bool locked, const SecureString &passPhrase)
+bool WalletModel::setWalletLocked(bool locked, const SecureString &passPhrase, bool formint)
 {
     if(locked)
     {
@@ -293,7 +293,11 @@ bool WalletModel::setWalletLocked(bool locked, const SecureString &passPhrase)
     else
     {
         // Unlock
-        return wallet->Unlock(passPhrase);
+        bool rc;
+        rc = wallet->Unlock(passPhrase);
+        if (rc && formint)
+            wallet->fWalletUnlockMintOnly=true;
+        return rc;
     }
 }
 
