@@ -648,7 +648,7 @@ void BitcoinGUI::setNumBlocks(int count, int nTotalBlocks)
     progressBar->setToolTip(tooltip);
 }
 
-void BitcoinGUI::message(const QString &title, const QString &message, unsigned int style)
+void BitcoinGUI::message(const QString &title, const QString &message, unsigned int style, const QString &detail)
 {
   QString strTitle = tr("GrowthCoin") + " - ";
   // Default to information icon
@@ -688,6 +688,9 @@ void BitcoinGUI::message(const QString &title, const QString &message, unsigned 
           buttons = QMessageBox::Ok;
 
       QMessageBox mBox((QMessageBox::Icon)nMBoxIcon, strTitle, message, buttons);
+
+      if(!detail.isEmpty()) { mBox.setDetailedText(detail); }
+
       mBox.exec();
   }
   else
