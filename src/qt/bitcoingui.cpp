@@ -133,9 +133,13 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     frameBlocksLayout->setContentsMargins(3,0,3,0);
     frameBlocksLayout->setSpacing(3);
     labelEncryptionIcon = new GUIUtil::ClickableLabel();
+
     labelConnectionsIcon = new GUIUtil::ClickableLabel();
     connect(labelConnectionsIcon, SIGNAL(clicked()),this,SLOT(connectionIconClicked()));
-    labelBlocksIcon = new QLabel();
+
+    labelBlocksIcon = new GUIUtil::ClickableLabel();
+    connect(labelBlocksIcon, SIGNAL(clicked()),this,SLOT(blocksIconClicked()));
+
     frameBlocksLayout->addStretch();
     frameBlocksLayout->addWidget(labelEncryptionIcon);
     frameBlocksLayout->addStretch();
@@ -573,6 +577,35 @@ void BitcoinGUI::connectionIconClicked()
           .arg(strAllPeer));
 }
 
+void BitcoinGUI::blocksIconClicked()
+{
+
+   int unit = clientModel->getOptionsModel()->getDisplayUnit();
+
+   message(tr("Extended Block Chain Information"),
+       tr("Client Version: %1\n"
+          "Protocol Version: %2\n"
+          "Wallet Version: %3\n\n"
+          "Last Block\n"
+          "Number: %4\n"
+          "Time: %5\n\n"
+          "Current\n"
+          "PoW Difficulty: %6\n"
+          "PoW MH/s: %7\n"
+          "PoW Reward: %8\n\n"
+          "Money Supply: %9\n")
+          .arg(clientModel->formatFullVersion())
+          .arg(clientModel->getProtocolVersion())
+          .arg(walletModel->getWalletVersion())
+          .arg(clientModel->getNumBlocks())
+          .arg(clientModel->getLastBlockDate().toString())
+          .arg(clientModel->getDifficulty())
+          .arg(clientModel->getPoWMHashPS())
+          .arg(BitcoinUnits::formatWithUnit(unit, clientModel->getProofOfWorkReward(), false))
+          .arg(BitcoinUnits::formatWithUnit(unit, clientModel->getMoneySupply(), false))
+       ,CClientUIInterface::MODAL);
+}
+
 void BitcoinGUI::setNumConnections(int count)
 {
     QString icon;
@@ -636,7 +669,7 @@ void BitcoinGUI::setNumBlocks(int count, int nTotalBlocks)
         progressBar->setVisible(false);
     }
 
-	tooltip = tr("Current difficulty is %1.").arg(clientModel->GetDifficulty()) + QString("<br>") + tooltip;
+    tooltip = tr("Current difficulty is %1.").arg(clientModel->getDifficulty()) + QString("<br>") + tooltip;
 
     QDateTime lastBlockDate = clientModel->getLastBlockDate();
     int secs = lastBlockDate.secsTo(QDateTime::currentDateTime());

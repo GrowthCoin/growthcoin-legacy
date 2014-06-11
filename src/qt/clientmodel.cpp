@@ -13,6 +13,8 @@
 #include <QTimer>
 
 static const int64 nClientStartupTime = GetTime();
+double GetDifficulty(const CBlockIndex* blockindex);
+double GetPoWMHashPS();
 
 ClientModel::ClientModel(OptionsModel *optionsModel, QObject *parent) :
     QObject(parent), optionsModel(optionsModel),
@@ -60,6 +62,34 @@ QVector<CNodeStats> ClientModel::getPeerStats()
 int ClientModel::getNumBlocks() const
 {
     return nBestHeight;
+}
+
+int ClientModel::getProtocolVersion() const
+{
+    return PROTOCOL_VERSION;
+}
+
+double ClientModel::getDifficulty(bool fProofofStake)
+{
+    if (fProofofStake)
+        return GetDifficulty(GetLastBlockIndex(pindexBest,true));
+    else
+        return GetDifficulty(GetLastBlockIndex(pindexBest,false));
+}
+
+int64 ClientModel::getMoneySupply()
+{
+    return pindexBest->nMoneySupply;
+}
+
+double ClientModel::getPoWMHashPS()
+{
+    return GetPoWMHashPS();
+}
+
+int64 ClientModel::getProofOfWorkReward()
+{
+    return GetProofOfWorkReward(pindexBest->nHeight, 0, pindexBest->pprev->GetBlockHash());
 }
 
 int ClientModel::getNumBlocksAtStartup()
@@ -116,34 +146,6 @@ void ClientModel::updateAlert(const QString &hash, int status)
     // so that the view recomputes and updates the status bar.
     emit numBlocksChanged(getNumBlocks(), getNumBlocksOfPeers());
 }
-
-
-double ClientModel::GetDifficulty() const
-{
-    // Floating point number that is a multiple of the minimum difficulty,
-    // minimum difficulty = 1.0.
-
-    if (pindexBest == NULL)
-        return 1.0;
-    int nShift = (pindexBest->nBits >> 24) & 0xff;
-
-    double dDiff =
-        (double)0x0000ffff / (double)(pindexBest->nBits & 0x00ffffff);
-
-    while (nShift < 29)
-    {
-        dDiff *= 256.0;
-        nShift++;
-    }
-    while (nShift > 29)
-    {
-        dDiff /= 256.0;
-        nShift--;
-    }
-
-    return dDiff;
-}
-
 
 bool ClientModel::isTestNet() const
 {

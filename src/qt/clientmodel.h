@@ -27,6 +27,12 @@ public:
     int getNumConnections() const;
     int getNumBlocks() const;
     int getNumBlocksAtStartup();
+    int getProtocolVersion() const;
+    qint64 getMoneySupply();
+    double getDifficulty(bool fProofofStake=false);
+    double getPoWMHashPS();
+    qint64 getProofOfWorkReward();
+
 
     QVector<CNodeStats> getPeerStats();
 
@@ -45,7 +51,6 @@ public:
     QString formatBuildDate() const;
     QString clientName() const;
     QString formatClientStartupTime() const;
-	double GetDifficulty() const;
 
 private:
     OptionsModel *optionsModel;

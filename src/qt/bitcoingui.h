@@ -169,6 +169,8 @@ private slots:
     void lockIconClicked();
     /** Show information about peers */
     void connectionIconClicked();
+    /** Show information about network */
+    void blocksIconClicked();
 
 #ifndef Q_OS_MAC
     /** Handle tray icon clicked */
