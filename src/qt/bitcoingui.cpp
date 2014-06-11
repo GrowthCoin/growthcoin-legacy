@@ -26,6 +26,7 @@
 #include "guiutil.h"
 #include "rpcconsole.h"
 #include "ui_interface.h"
+#include "net.h"
 
 #ifdef Q_OS_MAC
 #include "macdockiconhandler.h"
@@ -132,7 +133,8 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     frameBlocksLayout->setContentsMargins(3,0,3,0);
     frameBlocksLayout->setSpacing(3);
     labelEncryptionIcon = new GUIUtil::ClickableLabel();
-    labelConnectionsIcon = new QLabel();
+    labelConnectionsIcon = new GUIUtil::ClickableLabel();
+    connect(labelConnectionsIcon, SIGNAL(clicked()),this,SLOT(connectionIconClicked()));
     labelBlocksIcon = new QLabel();
     frameBlocksLayout->addStretch();
     frameBlocksLayout->addWidget(labelEncryptionIcon);
@@ -524,6 +526,51 @@ void BitcoinGUI::lockIconClicked()
 
     if(walletModel->getEncryptionStatus() == WalletModel::Locked)
         unlockWalletForMint();
+}
+
+void BitcoinGUI::connectionIconClicked()
+{
+
+   QString strAllPeer;
+   QVector<CNodeStats> qvNodeStats = clientModel->getPeerStats();
+   uint64 nTotSendBytes = 0, nTotRecvBytes = 0 ,nTotBlocksRequested = 0;
+
+   BOOST_FOREACH(const CNodeStats& stats, qvNodeStats) {
+      QString strPeer;
+      nTotSendBytes+=stats.nSendBytes;
+      nTotRecvBytes+=stats.nRecvBytes;
+      nTotBlocksRequested+=stats.nBlocksRequested;
+
+      strPeer=tr("Peer IP: %1\n") .arg(stats.addrName.c_str());
+      strPeer=strPeer+tr("Time Connected: %1\n") .arg(QDateTime::fromTime_t(QDateTime::currentDateTimeUtc().toTime_t() - stats.nTimeConnected).toUTC().toString("hh:mm:ss"));
+      strPeer=strPeer+tr("Time of Last Send: %1\n") .arg(QDateTime::fromTime_t(stats.nLastSend).toString());
+      strPeer=strPeer+tr("Time of Last Recv: %1\n") .arg(QDateTime::fromTime_t(stats.nLastRecv).toString());
+      strPeer=strPeer+tr("Bytes Sent: %1\n") .arg(stats.nSendBytes);
+      strPeer=strPeer+tr("Bytes Recv: %1\n") .arg(stats.nRecvBytes);
+      strPeer=strPeer+tr("Blocks Requested: %1\n") .arg(stats.nBlocksRequested);
+      strPeer=strPeer+tr("Version: %1\n") .arg(stats.nVersion);
+      strPeer=strPeer+tr("SubVersion: %1\n") .arg(stats.strSubVer.c_str());
+      strPeer=strPeer+tr("Inbound?: %1\n") .arg(stats.fInbound ? "N": "Y");
+      strPeer=strPeer+tr("Starting Block: %1\n") .arg(stats.nStartingHeight);
+      strPeer=strPeer+tr("Ban Score(100 max): %1\n") .arg(stats.nMisbehavior);
+      strPeer=strPeer+tr("------------------------------------\n\n");
+
+      strAllPeer=strAllPeer+strPeer;
+   }
+
+  message(tr("Extended Peer Information"),
+          tr("Number of Connections: %1\n"
+             "Total Bytes Recv: %2\n"
+             "Total Bytes Sent: %3\n"
+             "Total Blocks Requested: %4\n\n"
+             "Please click \"Show Details\" for more information.\n")
+          .arg(clientModel->getNumConnections())
+          .arg(nTotRecvBytes)
+          .arg(nTotSendBytes)
+          .arg(nTotBlocksRequested),
+          CClientUIInterface::MODAL,
+          tr("%1")
+          .arg(strAllPeer));
 }
 
 void BitcoinGUI::setNumConnections(int count)

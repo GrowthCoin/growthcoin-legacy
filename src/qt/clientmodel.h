@@ -7,6 +7,7 @@ class OptionsModel;
 class AddressTableModel;
 class TransactionTableModel;
 class CWallet;
+class CNodeStats;
 
 QT_BEGIN_NAMESPACE
 class QDateTime;
@@ -26,6 +27,8 @@ public:
     int getNumConnections() const;
     int getNumBlocks() const;
     int getNumBlocksAtStartup();
+
+    QVector<CNodeStats> getPeerStats();
 
     QDateTime getLastBlockDate() const;
 
