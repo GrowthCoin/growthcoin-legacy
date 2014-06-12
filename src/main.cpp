@@ -4214,12 +4214,14 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
     uint256 hashblock = pblock->GetHash();
     uint256 hashTarget = CBigNum().SetCompact(pblock->nBits).getuint256();
 
-    if (hashblock > hashTarget && pblock->IsProofOfWork())
-        return error("BitcoinMiner : proof-of-work not meeting target");
+    if(!pblock->IsProofOfWork())
+        return error("CheckWork() : %s is not a proof-of-work block", hashblock.GetHex().c_str());
+
+    if (hashblock > hashTarget)
+        return error("CheckWork() : proof-of-work not meeting target");
 
     //// debug print
-    printf("BitcoinMiner:\n");
-    printf("new block found  \n  hashblock: %s  \ntarget: %s\n", hashblock.GetHex().c_str(), hashTarget.GetHex().c_str());
+    printf("CheckWork() : new proof-of-work block found  \n  hashblock: %s  \ntarget: %s\n", hashblock.GetHex().c_str(), hashTarget.GetHex().c_str());
     pblock->print();
     printf("generated %s\n", FormatMoney(pblock->vtx[0].vout[0].nValue).c_str());
 
@@ -4227,7 +4229,7 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
     {
         LOCK(cs_main);
         if (pblock->hashPrevBlock != hashBestChain)
-            return error("BitcoinMiner : generated block is stale");
+            return error("CheckWork : generated block is stale");
 
         // Remove key from key pool
         reservekey.KeepKey();
@@ -4240,7 +4242,7 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
 
         // Process this block the same as if we had received it from another node
         if (!ProcessBlock(NULL, pblock))
-            return error("BitcoinMiner : ProcessBlock, block not accepted");
+            return error("CheckWork : ProcessBlock, block not accepted");
     }
 
     return true;
@@ -4347,7 +4349,7 @@ void BitcoinMiner(CWallet *pwallet, bool fProofOfStake)
                 strMintWarning = "";
                 printf("CPUMiner : proof-of-stake block found %s\n", pblock->GetHash().ToString().c_str()); 
                 SetThreadPriority(THREAD_PRIORITY_NORMAL);
-                CheckWork(pblock.get(), *pwalletMain, reservekey);
+                CheckStake(pblock.get(), *pwalletMain);
                 SetThreadPriority(THREAD_PRIORITY_LOWEST);
             }
             Sleep(500);
