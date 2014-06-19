@@ -32,11 +32,15 @@ public:
     double getDifficulty(bool fProofofStake=false);
     double getPoWMHashPS();
     qint64 getProofOfWorkReward();
+    double getPosKernalPS();
+    int getStakeTargetSpacing();
+    double getProofOfStakeReward();
+    int getLastPoSBlock();
 
 
     QVector<CNodeStats> getPeerStats();
 
-    QDateTime getLastBlockDate() const;
+    QDateTime getLastBlockDate(bool fProofofStake=false) const;
 
     //! Return true if client connected to testnet
     bool isTestNet() const;
