@@ -997,7 +997,7 @@ int64 CWallet::GetBalance() const
         for (map<uint256, CWalletTx>::const_iterator it = mapWallet.begin(); it != mapWallet.end(); ++it)
         {
             const CWalletTx* pcoin = &(*it).second;
-            if (pcoin->IsConfirmed())
+            if (pcoin->IsTrusted())
                 nTotal += pcoin->GetAvailableCredit();
         }
     }
@@ -1013,7 +1013,7 @@ int64 CWallet::GetUnconfirmedBalance() const
         for (map<uint256, CWalletTx>::const_iterator it = mapWallet.begin(); it != mapWallet.end(); ++it)
         {
             const CWalletTx* pcoin = &(*it).second;
-            if (!pcoin->IsFinal() || !pcoin->IsConfirmed())
+            if (!pcoin->IsFinal() || !pcoin->IsTrusted())
                 nTotal += pcoin->GetAvailableCredit();
         }
     }
@@ -1049,7 +1049,7 @@ void CWallet::AvailableCoins(vector<COutput>& vCoins, bool fOnlyConfirmed, const
             if (!pcoin->IsFinal())
                 continue;
 
-            if (fOnlyConfirmed && !pcoin->IsConfirmed())
+            if (fOnlyConfirmed && !pcoin->IsTrusted())
                 continue;
 
             if (pcoin->IsCoinBase() && pcoin->GetBlocksToMaturity() > 0)
@@ -2155,7 +2155,7 @@ std::map<CTxDestination, int64> CWallet::GetAddressBalances()
         {
             CWalletTx *pcoin = &walletEntry.second;
 
-            if (!pcoin->IsFinal() || !pcoin->IsConfirmed())
+            if (!pcoin->IsFinal() || !pcoin->IsTrusted())
                 continue;
 
             if ((pcoin->IsCoinBase() || pcoin->IsCoinStake()) && pcoin->GetBlocksToMaturity() > 0)
