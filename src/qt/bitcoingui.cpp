@@ -576,13 +576,15 @@ void BitcoinGUI::stakingIconClicked()
         tr("Client Version: %1\n"
            "Protocol Version: %2\n"
            "Current Wallet Version: %3\n\n"
-           "Last PoS Block Number: %4\n"
-           "Last PoS Block Time: %5\n\n"
-           "Current PoS Difficulty: %6\n"
-           "Current PoS Netweight: %7\n"
-           "Current PoS Yearly Interest: %8\%\n\n"
+           "-- Last PoS Block --\n"
+           "Number: %4\n"
+           "Time: %5\n\n"
+           "-- Current PoS --\n"
+           "Difficulty: %6\n"
+           "Network Weight: %7\n"
+           "Yearly Interest: %8\%\n\n"
            "Wallet PoS Weight: %9\n\n"
-           "Network Money Supply: %10\n")
+           "Money Supply: %10\n")
            .arg(clientModel->formatFullVersion())
            .arg(clientModel->getProtocolVersion())
            .arg(walletModel->getWalletVersion())
@@ -650,13 +652,13 @@ void BitcoinGUI::blocksIconClicked()
        tr("Client Version: %1\n"
           "Protocol Version: %2\n"
           "Wallet Version: %3\n\n"
-          "Last Block\n"
+          "-- Last Block --\n"
           "Number: %4\n"
           "Time: %5\n\n"
-          "Current\n"
-          "PoW Difficulty: %6\n"
-          "PoW MH/s: %7\n"
-          "PoW Reward: %8\n\n"
+          "-- Current PoW --\n"
+          "Difficulty: %6\n"
+          "MH/s: %7\n"
+          "Reward: %8\n\n"
           "Money Supply: %9\n")
           .arg(clientModel->formatFullVersion())
           .arg(clientModel->getProtocolVersion())
