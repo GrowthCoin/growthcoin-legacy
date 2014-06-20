@@ -1,4 +1,5 @@
-IDI_ICON1 ICON DISCARDABLE "icons/Growthcoin.ico"
+IDI_ICON1 ICON DISCARDABLE "icons/growthcoin.ico"
+IDI_ICON2 ICON DISCARDABLE "icons/growthcoin_testnet.ico"
 
 #include <windows.h>             // needed for VERSIONINFO
 #include "../../clientversion.h" // holds the needed client version information
