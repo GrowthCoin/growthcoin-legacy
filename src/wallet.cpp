@@ -12,6 +12,8 @@
 #include "coincontrol.h"
 #include "kernel.h"
 
+#include <boost/algorithm/string/replace.hpp>
+
 using namespace std;
 extern int nStakeMaxAge;
 
