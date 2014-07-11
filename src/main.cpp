@@ -2530,14 +2530,14 @@ bool LoadBlockIndex(bool fAllowNew)
             return false;
 
         // Genesis block
-        const char* pszTimestamp = "July 31, 2013 12pm EDT: The U.S. economy grew 1.7% in the second quarter, aided by solid consumer spending and a ramp-up in business investment, the government said Wednesday.";
+        const char* pszTimestamp = !fTestNet ? "July 31, 2013 12pm EDT: The U.S. economy grew 1.7% in the second quarter, aided by solid consumer spending and a ramp-up in business investment, the government said Wednesday." : "The GrowthCoin Testnet for the coins that grow.";
         CTransaction txNew;
         txNew.nTime = nChainStartTime;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CBigNum(9999) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
         txNew.vout[0].SetEmpty();
-		txNew.strTxComment = "text:GrowthCoin genesis block";
+        txNew.strTxComment = !fTestNet ? "text:GrowthCoin genesis block" : "text:GrowthCoin Unick TestNet genesis block";
 
         CBlock block;
         block.vtx.push_back(txNew);
@@ -2547,6 +2547,12 @@ bool LoadBlockIndex(bool fAllowNew)
         block.nTime    = 1375341361;
         block.nBits    = bnProofOfWorkLimit.GetCompact();
         block.nNonce   = 18181818;
+        if(fTestNet)
+        {
+            block.nTime     = 1405052590;
+            block.nBits     = bnProofOfWorkLimit.GetCompact();
+            block.nNonce    = 842456;
+        }
 
         //// debug print
         block.print();
@@ -2555,7 +2561,10 @@ bool LoadBlockIndex(bool fAllowNew)
         printf("block.nTime = %u \n", block.nTime);
         printf("block.nNonce = %u \n", block.nNonce);
 
-        assert(block.hashMerkleRoot == uint256("0x14531096cb0c017670183db62646eb5c7c83535f5494ea324152ecbf9b79f2bf"));
+        if(fTestNet)
+            assert(block.hashMerkleRoot == uint256("0x03bfb92ce08d2cd22afd34d7626c89828192281ca308d63ffae5cd33b8b2e236"));
+        else
+            assert(block.hashMerkleRoot == uint256("0x14531096cb0c017670183db62646eb5c7c83535f5494ea324152ecbf9b79f2bf"));
 		assert(block.GetHash() == (!fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet));
 
         // Start new block file
