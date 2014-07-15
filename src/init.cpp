@@ -843,6 +843,7 @@ bool AppInit2()
             if (file)
                 LoadExternalBlockFile(file);
         }
+        exit(0);
     }
 
     filesystem::path pathBootstrap = GetDataDir() / "bootstrap.dat";
